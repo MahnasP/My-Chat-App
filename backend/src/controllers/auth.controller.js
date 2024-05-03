@@ -51,7 +51,7 @@ const login = asyncHandler(async (req, res) => {
   res
     .status(200)
     .cookie("accessToken", accessToken, {
-      httponly: true,
+      httpOnly: true,
       sameSite: "strict",
       secure: process.env.NODE_ENV !== "development",
     })
@@ -67,7 +67,7 @@ const logout = asyncHandler(async (req, res) => {
   res
     .status(200)
     .clearCookie("accessToken", {
-      httponly: true,
+      httpOnly: true,
       secure: process.env.NODE_ENV !== "development",
     })
     .json({ message: "Logged Out" });
