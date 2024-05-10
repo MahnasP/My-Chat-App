@@ -32,7 +32,7 @@ const getMessages = asyncHandler(async (req, res) => {
   try {
     const { id: otheruserId } = req.params;
     const senderId = req.user._id;
-    const convo = Conversation.findOne({
+    const convo = await Conversation.findOne({
       participants: { $all: [senderId, otheruserId] },
     }).populate("messages");
     if (!convo) return res.status(200).json([]);
