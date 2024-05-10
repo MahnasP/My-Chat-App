@@ -18,7 +18,8 @@ const sendMessage = asyncHandler(async (req, res) => {
     }
       const newMessage = await Message.create({ senderId, receiverId, message });
       
-    if (newMessage) convo.messages.push(newMessage._id);
+      if (newMessage) convo.messages.push(newMessage._id);
+      await convo.save();
 
     res.status(201).json(newMessage);
   } catch (error) {
