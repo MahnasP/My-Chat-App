@@ -9,7 +9,7 @@ function SearchInput() {
         placeholder="Search.."
         className="input input-bordered input-accent w-full max-w-xs"
       />
-          <button className="btn btn-circle bg-orange-400 hover:bg-orange-200">
+          <button className="btn btn-circle bg-accent hover:bg-orange-200">
           <BiSearchAlt2 className=" w-6 h-6 outline-none"/>
           </button>
     </form>

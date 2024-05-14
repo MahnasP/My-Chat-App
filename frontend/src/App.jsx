@@ -1,12 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Home from "./pages/home/Home";
+import LoadingPage from "./components/LoadingPage";
+import { Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 function App() {
-  return (
-    <div className=" p-4 h-screen flex items-center justify-center">
-      <Home/>
-    </div>
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1400);
+  }, []);
+  return !loading ? (
+    <>
+      <div>
+        <Toaster />
+      </div>
+      <div className=" p-4 h-screen flex items-center justify-center">
+        <Outlet />
+      </div>
+    </>
+  ) : (
+    <LoadingPage />
   );
 }
 

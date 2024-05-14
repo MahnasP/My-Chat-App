@@ -1,5 +1,6 @@
 import React from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
+import MessageContainer from "../../components/messages/MessageContainer";
 
 function Home() {
   return (
@@ -8,7 +9,7 @@ function Home() {
     bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-orange-100"
     >
       <Sidebar/>
-      
+      <MessageContainer/>
     </div>
   );
 }

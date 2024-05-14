@@ -30,12 +30,21 @@ const signup = asyncHandler(async (req, res) => {
     profilePic,
   });
 
-  res.status(201).json({
-    _id: createdUser._id,
-    fullname: createdUser.fullname,
-    username: createdUser.username,
-    profilePic: createdUser.profilePic,
-  });
+  const accessToken = generateAccessToken(createdUser._id);
+
+  res
+    .status(201)
+    .cookie("accessToken", accessToken, {
+      httpOnly: true,
+      sameSite: "strict",
+      secure: process.env.NODE_ENV !== "development",
+    })
+    .json({
+      _id: createdUser._id,
+      fullname: createdUser.fullname,
+      username: createdUser.username,
+      profilePic: createdUser.profilePic,
+    });
 });
 
 const login = asyncHandler(async (req, res) => {
