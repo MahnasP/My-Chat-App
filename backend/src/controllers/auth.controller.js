@@ -53,7 +53,7 @@ const login = asyncHandler(async (req, res) => {
   if (!user) return res.status(400).json({ error: "User does not exist" });
   const ispassvalid = await user.isPasswordCorrect(password);
   if (!ispassvalid)
-    return res.status(400).json({ error: "Invalid username or password" });
+    return res.json({ error: "Invalid username or password" }).status(400);
 
   const accessToken = generateAccessToken(user._id);
 

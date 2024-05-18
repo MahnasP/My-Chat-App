@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import useLogin from "../../hooks/useLogin";
+
+
+
 
 function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const { login } = useLogin();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    await login({ username, password });
+  }
+
   return (
     <div className=" flex flex-col items-center justify-center min-w-96 mx-auto">
       <div className="p-6 w-full shadow-md bg-orange-50 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-orange-100">
@@ -9,7 +22,7 @@ function Login() {
           Login
           <span className="text-orange-400"> ChatApp</span>
         </h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <label className="label p-2">
               <span className="text-base label-text">Username</span>
@@ -18,6 +31,8 @@ function Login() {
               type="text"
               placeholder="Enter username"
               className="input input-bordered input-accent w-full"
+              value={username}
+              onChange={(e)=>{setUsername(e.target.value)}}
             />
           </div>
 
@@ -29,6 +44,8 @@ function Login() {
               type="password"
               placeholder="Enter Password"
               className="input input-bordered input-accent w-full"
+              value={password}
+              onChange={(e)=>{setPassword(e.target.value)}}
             />
           </div>
           <Link

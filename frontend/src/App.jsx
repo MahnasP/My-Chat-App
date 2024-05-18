@@ -4,9 +4,13 @@ import Home from "./pages/home/Home";
 import LoadingPage from "./components/LoadingPage";
 import { Outlet } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { useDispatch } from "react-redux";
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
