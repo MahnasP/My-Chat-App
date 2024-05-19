@@ -15,7 +15,7 @@ function useLogout() {
       const data = response.data;
         if (data.error) throw new Error(response.data.error);
         dispatch(authLogout());
-        localStorage.removeItem('reduxState');
+        localStorage.removeItem('userData');
     } catch (error) {
       toast.error(error.message);
     } finally {

@@ -57,8 +57,10 @@ function useSignup() {
         const data = response.data;
         if (data.error)
             throw new Error(response.data.error);
-        if (data)
-            dispatch(authLogin(data));
+      if (data) {
+        localStorage.setItem("userData", JSON.stringify(data));
+        dispatch(authLogin(data));
+      }
         navigate("/");
     } catch (error) {
       toast.error(error.message);

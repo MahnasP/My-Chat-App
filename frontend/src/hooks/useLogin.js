@@ -27,6 +27,8 @@ function useLogin() {
         const data = response.data;
       if (data.error) throw new Error(data.error);
       dispatch(authLogin(data));
+      localStorage.setItem("userData", JSON.stringify(data));
+      
     } catch (error) {
       toast.error(error.message);
     } finally {

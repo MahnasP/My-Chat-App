@@ -1,20 +1,29 @@
-import React from "react";
+// eslint-disable-next-line no-unused-vars
+import React, { useEffect, useRef } from "react";
 import Message from "./Message";
+import useGetMessages from "../../hooks/useGetMessages";
+import MessageSkeleton from "../skeletons/MessageSkeleton";
 
 function Messages() {
+  const { loading, messages,authUser } = useGetMessages();
+  const lastMessRef = useRef();
+  useEffect(() => { 
+    setTimeout(() => {
+      lastMessRef.current?.scrollIntoView({ behaviour: "smooth" });
+    }, 100);
+  }, [messages]);
+
   return (
     <div className="px-4 flex-1 overflow-auto">
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
+      {!loading && messages.length > 0 && messages.map((message) => (
+        <div key={message._id} ref={lastMessRef}>
+          <Message message={message} authUser={authUser} />
+        </div>
+      ))}
+      {loading && <><MessageSkeleton /><MessageSkeleton /></>}
+      {!loading && messages.length === 0 &&
+        (<p className="text-center text-gray-600"> Send a message to start the conversaton</p>)}
+      
     </div>
   );
 }
