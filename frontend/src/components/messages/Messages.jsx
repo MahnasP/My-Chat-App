@@ -3,10 +3,14 @@ import React, { useEffect, useRef } from "react";
 import Message from "./Message";
 import useGetMessages from "../../hooks/useGetMessages";
 import MessageSkeleton from "../skeletons/MessageSkeleton";
+import useListenMessages from "../../hooks/useListenMessages";
 
 function Messages() {
   const { loading, messages,authUser } = useGetMessages();
   const lastMessRef = useRef();
+
+  useListenMessages();
+
   useEffect(() => { 
     setTimeout(() => {
       lastMessRef.current?.scrollIntoView({ behaviour: "smooth" });
@@ -15,7 +19,7 @@ function Messages() {
 
   return (
     <div className="px-4 flex-1 overflow-auto">
-      {!loading && messages.length > 0 && messages.map((message) => (
+      {!loading && messages.length > 0 && authUser && messages.map((message) => (
         <div key={message._id} ref={lastMessRef}>
           <Message message={message} authUser={authUser} />
         </div>

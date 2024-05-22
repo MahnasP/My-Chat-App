@@ -3,8 +3,9 @@ import authRoutes from "./src/routes/auth.routes.js"
 import messageRoutes from "./src/routes/message.routes.js"
 import userRoutes from "./src/routes/user.routes.js"
 import cookieParser from "cookie-parser";
+import { app } from "./src/socket/socket.js";
 
-const app = express();
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

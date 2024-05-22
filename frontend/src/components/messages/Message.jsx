@@ -10,16 +10,17 @@ function Message({ message,authUser }) {
   const profilePic = fromMe ? authUser.profilePic : selectedConversation?.profilePic;
   const bubbleBgcolor = fromMe ? "chat-bubble-accent" : "";
   const formattedTime = extractTime(message.createdAt);
+  const shakeClass = message.shouldShake ? "shake" : "";
 
   return (
-     <div className = {`chat ${chatClassName}`} >
+     <div className = {`chat ${chatClassName} `} >
     <div className="chat-image avatar">
       <div className="w-10 rounded-full">
         <img alt="chat bubble avatar" src={profilePic} />
       </div>
     </div>
     
-      <div className={`chat-bubble pb-2 ${bubbleBgcolor}`}>{ message.message}</div>
+      <div className={`chat-bubble pb-2 ${bubbleBgcolor} ${shakeClass}`}>{ message.message}</div>
       <div className="chat-footer">
       <time className="text-xs opacity-50">{formattedTime}</time>
     </div>

@@ -6,6 +6,9 @@ function Conversation({ conversation, lastIdx }) {
     const dispatch = useDispatch();
     const selectedConversation = useSelector((state) => state.convo.selectedConversation)
     const isSelected = selectedConversation?._id === conversation._id;
+    const onlineUsers = useSelector((state) => state.socket.onlineUsers);
+    const isOnline = onlineUsers.includes(conversation._id);
+
     return (
       <>
             <div
@@ -14,7 +17,7 @@ function Conversation({ conversation, lastIdx }) {
                 onClick={()=>{dispatch(setSelectedConversation(conversation))}}
             >
             
-          <div className='avatar online'>
+          <div className={`avatar ${isOnline?"online":""}`} >
               <div className=' w-12 rounded-full'>
                   <img
                       src={conversation.profilePic}

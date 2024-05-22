@@ -5,11 +5,12 @@ import LoadingPage from "./components/LoadingPage";
 import { Outlet } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
+import useSocket from "./hooks/useSocket";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  
+   const socket = useSocket();
 
   useEffect(() => {
     setTimeout(() => {

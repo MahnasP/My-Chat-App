@@ -8,7 +8,7 @@ function LogoutBtn() {
   return (
       <div className='mt-auto'>
       <BiLogOut onClick={() => {
-        navigate("/login");
+        
         logout();
       }} className='w-6 h-6 text-white hover:text-orange-400 cursor-pointer' />
       </div>
