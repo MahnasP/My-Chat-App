@@ -1,4 +1,4 @@
-import { User } from "../models/User.model.js";
+import { User } from "../models/user.model.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import jwt from "jsonwebtoken";
 
@@ -17,8 +17,6 @@ const signup = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ username });
   if (user) return res.status(400).json({ error: "User already exists" });
-  const fnarr = fullname.split(" ");
-  const tempapiname = fnarr.length > 1 ? fnarr[0] + "+" + fnarr[1] : fullname;
   const profilePic =
     "https://avatar.iran.liara.run/public/" +
     (gender === "male" ? "boy" : "girl");
