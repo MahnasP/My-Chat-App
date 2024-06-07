@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    selectedConversation: null,
+    selectedConversation: null,//selected user to chat with - stores user object
     messages:[],
 }
 

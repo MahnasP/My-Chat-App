@@ -25,7 +25,7 @@ const sendMessage = asyncHandler(async (req, res) => {
     //socket functionality:
     const receiverSocketId = getReceiverSocketId(receiverId);
     if (receiverSocketId) {
-      io.to(receiverSocketId).emit("newMessage", newMessage);
+      io.to(receiverSocketId).emit("newMessage", { newMessage,senderId });
     }
 
     res.status(201).json(newMessage);

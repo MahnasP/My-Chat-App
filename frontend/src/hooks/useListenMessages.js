@@ -6,12 +6,17 @@ import { setMessages } from "../store/conversationSlice";
 function useListenMessages() {
     const socket = useSelector((state) => state.socket.socket);
     const messages = useSelector((state) => state.convo.messages);
+    const selectedConversation = useSelector(
+        (state) => state.convo.selectedConversation
+      );
     const dispatch = useDispatch();
 
     useEffect(() => {
-        socket.on("newMessage", (newMessage) => {
-            newMessage.shouldShake = true;
-            dispatch(setMessages([...messages, newMessage]));
+        socket.on("newMessage", ({ newMessage, senderId }) => {
+            if (senderId === selectedConversation._id) {
+                newMessage.shouldShake = true;
+                dispatch(setMessages([...messages, newMessage]));
+            }
         })
 
         return () => socket.off("newMessage");

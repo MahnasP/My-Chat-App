@@ -7,6 +7,7 @@ export default {
   ],
   theme: {
     extend: {
+      
       keyframes: {
         wiggle: {
           '0%, 100%': { transform: 'rotate(-2.5deg)' },

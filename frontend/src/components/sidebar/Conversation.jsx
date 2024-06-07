@@ -34,7 +34,7 @@ function Conversation({ conversation, lastIdx }) {
           
 
             </div>
-            {!lastIdx?<div className='divider  my-0 py-1 h-1 mx-7'></div>:null}
+            {!lastIdx?<div className='divider divider my-0 py-1 h-1 mx-7'></div>:null}
             </>
   )
 }

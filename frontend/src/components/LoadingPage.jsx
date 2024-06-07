@@ -13,7 +13,7 @@ function LoadingPage() {
   };
 
   return (
-    <div className="p-4 h-screen flex flex-col items-center justify-center bg-slate-50">
+    <div className="p-4 h-screen flex flex-col items-center justify-center bg-[#111925]">
           <Lottie options={defaultOptions} height={150} width={150} />
           <h1 className=" text-orange-300 font-semibold font-serif">ChatApp</h1>
     </div>

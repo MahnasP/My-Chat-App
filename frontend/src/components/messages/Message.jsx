@@ -22,7 +22,9 @@ function Message({ message,authUser }) {
     
       <div className={`chat-bubble pb-2 ${bubbleBgcolor} ${shakeClass}`}>{ message.message}</div>
       <div className="chat-footer">
-      <time className="text-xs opacity-50">{formattedTime}</time>
+        <time className="text-xs  text-slate-300 opacity-50">{formattedTime}</time>
+        <p className="text-xs opacity-50  text-slate-300 inline-block pl-1.5">{fromMe && message.seen ? " .  seen" : ""}</p>
+        
     </div>
     
   </div >
