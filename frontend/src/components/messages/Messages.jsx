@@ -28,7 +28,7 @@ function Messages() {
       ))}
       {loading && <><MessageSkeleton /><MessageSkeleton /></>}
       {!loading && messages.length === 0 &&
-        (<p className="text-center text-gray-600"> Send a message to start the conversaton</p>)}
+        (<p className="text-center text-gray-200"> Send a message to start the conversaton</p>)}
       
     </div>
   );

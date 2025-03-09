@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setMessages } from "../store/conversationSlice";
+import { socketService } from "../services/socket";
 
 const useSeeMessages = () => {
   const dispatch = useDispatch();
@@ -9,10 +10,14 @@ const useSeeMessages = () => {
   );
   const messages = useSelector((state) => state.convo.messages);
   const authUser = useSelector((state) => state.auth.userData);
-  const socket = useSelector((state) => state.socket.socket);
+
   useEffect(() => {
-    const lastMessageIsFromOtherUser = messages.length &&
+    const socket = socketService.getSocket();
+    if (!socket || !messages.length || !selectedConversation) return;
+
+    const lastMessageIsFromOtherUser =
       messages[messages.length - 1].senderId !== authUser._id;
+
     if (lastMessageIsFromOtherUser) {
       socket.emit("markMessagesAsSeen", {
         currUserID: authUser._id,
@@ -20,10 +25,7 @@ const useSeeMessages = () => {
       });
     }
 
-
-      //updating current user messages as seen after listening that this user's messages are seeen
     socket.on("messagesSeen", ({ otherUserId }) => {
-      console.log(otherUserId === authUser._id);
       if (otherUserId === authUser._id) {
         const updatedMessages = messages.map((message) => {
           if (!message.seen) {
@@ -31,13 +33,12 @@ const useSeeMessages = () => {
           }
           return message;
         });
-        console.log("my messages are seen")
         dispatch(setMessages(updatedMessages));
       }
     });
-      
-      return () => socket.off("messagesSeen");
-  }, [socket, authUser, selectedConversation, dispatch, messages]);
+
+    return () => socket.off("messagesSeen");
+  }, [authUser, selectedConversation, dispatch, messages]);
 };
 
 export default useSeeMessages;

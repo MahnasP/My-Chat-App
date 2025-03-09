@@ -6,11 +6,11 @@ function LogoutBtn() {
   const navigate = useNavigate();
   const { logout } = useLogout();
   return (
-      <div className='mt-auto'>
+      <div className='mt-4'>
       <BiLogOut onClick={() => {
         
         logout();
-      }} className='w-6 h-6 text-white hover:text-orange-400 cursor-pointer' />
+      }} className='w-6 h-6 hover:text-orange-400 cursor-pointer' />
       </div>
   )
 }

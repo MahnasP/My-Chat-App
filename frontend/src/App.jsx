@@ -10,7 +10,7 @@ import useSocket from "./hooks/useSocket";
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-   const socket = useSocket();
+  useSocket(); // Initialize socket connection
 
   useEffect(() => {
     setTimeout(() => {
