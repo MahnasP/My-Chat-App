@@ -5,6 +5,9 @@ import { useDispatch } from "react-redux";
 import { login as authLogin } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
 
+const authapi = axios.create({
+  baseURL: `${import.meta.env.VITE_BACKEND_SERVER}/api/auth`,
+});
 
 function validate({ fullname, username, password, confirmPassword, gender }) {
   if (!fullname || !username || !password || !confirmPassword || !gender) {
@@ -23,10 +26,10 @@ function validate({ fullname, username, password, confirmPassword, gender }) {
 }
 
 function useSignup() {
-    const [loading, setLoading] = useState(false);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const signup = async ({
     fullname,
     username,
@@ -47,21 +50,20 @@ function useSignup() {
 
     setLoading(true);
     try {
-      const response = await axios.post("/api/auth/signup", {
+      const response = await authapi.post("/signup", {
         fullname,
         username,
         password,
         confirmPassword,
         gender,
       });
-        const data = response.data;
-        if (data.error)
-            throw new Error(response.data.error);
+      const data = response.data;
+      if (data.error) throw new Error(response.data.error);
       if (data) {
         localStorage.setItem("userData", JSON.stringify(data));
         dispatch(authLogin(data));
       }
-        navigate("/");
+      navigate("/");
     } catch (error) {
       toast.error(error.message);
     } finally {
