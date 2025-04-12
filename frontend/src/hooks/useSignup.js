@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const authapi = axios.create({
   baseURL: `${import.meta.env.VITE_BACKEND_SERVER}/api/auth`,
+  withCredentials: true, // Added to include cookies in requests
 });
 
 function validate({ fullname, username, password, confirmPassword, gender }) {

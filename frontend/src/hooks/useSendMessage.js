@@ -6,6 +6,7 @@ import { setMessages } from "../store/conversationSlice";
 
 const api = axios.create({
   baseURL: `${import.meta.env.VITE_BACKEND_SERVER}/api`,
+  withCredentials: true, // Added to include cookies in requests
 });
 
 function useSendMessage() {

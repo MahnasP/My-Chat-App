@@ -36,7 +36,7 @@ const signup = asyncHandler(async (req, res) => {
     .cookie("accessToken", accessToken, {
       httpOnly: true,
       sameSite: "strict",
-      secure: process.env.NODE_ENV !== "development",
+      secure: process.env.NODE_ENV === "production", // Ensure secure flag is set correctly
     })
     .json({
       _id: createdUser._id,
@@ -61,7 +61,7 @@ const login = asyncHandler(async (req, res) => {
     .cookie("accessToken", accessToken, {
       httpOnly: true,
       sameSite: "strict",
-      secure: process.env.NODE_ENV !== "development",
+      secure: process.env.NODE_ENV === "production", // Ensure secure flag is set correctly
     })
     .json({
       _id: user._id,
@@ -76,7 +76,7 @@ const logout = asyncHandler(async (req, res) => {
     .status(200)
     .clearCookie("accessToken", {
       httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
+      secure: process.env.NODE_ENV === "production", // Ensure secure flag is set correctly
     })
     .json({ message: "Logged Out" });
 });

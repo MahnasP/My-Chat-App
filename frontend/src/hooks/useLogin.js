@@ -6,6 +6,7 @@ import { login as authLogin } from "../store/authSlice";
 
 const authapi = axios.create({
   baseURL: `${import.meta.env.VITE_BACKEND_SERVER}/api/auth`,
+  withCredentials: true, // Added to include cookies in requests
 });
 
 function validate({ username, password }) {
