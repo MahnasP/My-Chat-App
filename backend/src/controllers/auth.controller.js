@@ -35,7 +35,7 @@ const signup = asyncHandler(async (req, res) => {
     .status(201)
     .cookie("accessToken", accessToken, {
       httpOnly: true,
-      sameSite: "strict", // Ensure secure flag is set correctly
+      sameSite: "None", // Ensure secure flag is set correctly
     })
     .json({
       _id: createdUser._id,
@@ -59,7 +59,7 @@ const login = asyncHandler(async (req, res) => {
     .status(200)
     .cookie("accessToken", accessToken, {
       httpOnly: true,
-      sameSite: "strict",
+      sameSite: "None",
       secure: process.env.NODE_ENV === "production", // Ensure secure flag is set correctly
     })
     .json({
